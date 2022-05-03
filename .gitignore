@@ -1,39 +1,26 @@
-# History files
-.Rhistory
-.Rapp.history
+#Задача 1.
 
-# Session Data files
-.RData
+df <- diamonds
 
-# User-specific files
-.Ruserdata
+m1 <- mean(df$price)
+m2 <- mean(df$carat)
+df$factor_price <- ifelse (df$price >= m1,1,0)
+df$factor_carat <- ifelse (df$carat >= m2,1,0)
+main_stat <- chisq.test(df$factor_price,df$factor_carat)
+main_stat <- main_stat$statistic
 
-# Example code in package build process
-*-Ex.R
 
-# Output files from R CMD build
-/*.tar.gz
+#Задача 2. Сохранение p value для точного критерия фишера.
+df <- mtcars
+main_stat<- fisher.test(df$am,df$vs)
+fisher_test <- main_stat$p.value
 
-# Output files from R CMD check
-/*.Rcheck/
 
-# RStudio files
-.Rproj.user/
+#Задача 3.Т-тест длинны зубов у Свинок по двум выборкам с параметрами
+# VC и 2, OJ и 0.5
 
-# produced vignettes
-vignettes/*.html
-vignettes/*.pdf
-
-# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-.httr-oauth
-
-# knitr and R markdown default cache directories
-*_cache/
-/cache/
-
-# Temporary files created by R markdown
-*.utf8.md
-*.knit.md
-
-# R Environment Variables
-.Renviron
+df <- ToothGrowth
+df1 <- subset (ToothGrowth, supp == "VC" & dose == "2") 
+df2 <- subset (ToothGrowth, supp == 'OJ' & dose == '0.5')
+a <- t.test(df1$len,df2$len)
+t_stat <- a$statistic
