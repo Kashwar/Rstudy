@@ -9,18 +9,23 @@ df$factor_carat <- ifelse (df$carat >= m2,1,0)
 main_stat <- chisq.test(df$factor_price,df$factor_carat)
 main_stat <- main_stat$statistic
 
-
 #Задача 2. Сохранение p value для точного критерия фишера.
 df <- mtcars
 main_stat<- fisher.test(df$am,df$vs)
 fisher_test <- main_stat$p.value
 
-
 #Задача 3.Т-тест длинны зубов у Свинок по двум выборкам с параметрами
 # VC и 2, OJ и 0.5
 
 df <- ToothGrowth
+
 df1 <- subset (ToothGrowth, supp == "VC" & dose == "2") 
 df2 <- subset (ToothGrowth, supp == 'OJ' & dose == '0.5')
 a <- t.test(df1$len,df2$len)
 t_stat <- a$statistic
+
+
+#Задача 4.
+df <- lekarstva
+a <- t.test(df$Pressure_before,df$Pressure_after,paired = T)
+a
