@@ -29,3 +29,9 @@ t_stat <- a$statistic
 df <- lekarstva
 a <- t.test(df$Pressure_before,df$Pressure_after,paired = T)
 a
+#Задача 5.
+# В этом задании нужно проверить гипотезу о равенстве средних двух выборок
+df <- read.table("dataset_11504_15.txt")
+bartlett.test(V1 ~ V2, df)
+t.test(V1 ~ V2, df, var.equal = T)
+wilcox.test(df$V1, df$V2)
