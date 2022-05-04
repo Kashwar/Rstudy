@@ -1,7 +1,6 @@
 #Задача 1.
 
 df <- diamonds
-
 m1 <- mean(df$price)
 m2 <- mean(df$carat)
 df$factor_price <- ifelse (df$price >= m1,1,0)
@@ -18,7 +17,6 @@ fisher_test <- main_stat$p.value
 # VC и 2, OJ и 0.5
 
 df <- ToothGrowth
-
 df1 <- subset (ToothGrowth, supp == "VC" & dose == "2") 
 df2 <- subset (ToothGrowth, supp == 'OJ' & dose == '0.5')
 a <- t.test(df1$len,df2$len)
@@ -29,9 +27,21 @@ t_stat <- a$statistic
 df <- lekarstva
 a <- t.test(df$Pressure_before,df$Pressure_after,paired = T)
 a
-#Задача 5.
-# В этом задании нужно проверить гипотезу о равенстве средних двух выборок
+#Задача 5. # В этом задании нужно проверить гипотезу о равенстве средних двух выборок
 df <- read.table("dataset_11504_15.txt")
 bartlett.test(V1 ~ V2, df)
 t.test(V1 ~ V2, df, var.equal = T)
 wilcox.test(df$V1, df$V2)
+
+#Задача 6,7 Дисперсионный анализ.
+df <- npk
+fit1 <- aov(yield~ (N + P + K)^2, data=df)
+summary(fit1)
+
+#Задача 8. Дисперсионный анализ + визуализация (бокс-плот)
+df <-  iris
+ggplot(df, aes(x = Sepal.Length, y = Species)) + 
+  geom_boxplot()
+boxplot(Sepal.Length ~ Species, data=df)
+fit <- aov(Sepal.Length ~ Species, data=df)
+summary(fit)
