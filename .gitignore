@@ -45,3 +45,5 @@ ggplot(df, aes(x = Sepal.Length, y = Species)) +
 boxplot(Sepal.Length ~ Species, data=df)
 fit <- aov(Sepal.Length ~ Species, data=df)
 summary(fit)
+
+
