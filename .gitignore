@@ -52,4 +52,9 @@ a$patient <- as.factor(a$patient)
 fit3 <- aov(temperature ~ pill + Error(patient/temperature), data = a)
 summary(fit3)
 
+#Задча 10.
+a <- read.csv('Pillulkin.csv')
+a$patient <- as.factor(a$patient)
+fit3 <- aov(temperature ~ pill*doctor + Error(patient/(pill*doctor)), data = a)
+summary(fit3)
 
