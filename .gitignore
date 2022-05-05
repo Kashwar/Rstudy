@@ -68,3 +68,58 @@ print (obj)
 install.packages("Hmisc")
 
 
+#Задача 12.
+NA.position <- function(x){
+  which(is.na(x)) 
+}
+
+
+#Задача 13.
+#Вариант 1. Говнокод.
+x <- c(1:100,NA,NA,1:200)
+NA.counter <- function(x){
+  c <- na.omit(x)
+  b <- which.max(which(c%in%c))
+  g <- which.max(which(x%in%x))
+  return(g-b)
+}
+#Вариант 2. Менее говнокод.
+NA.counter <- function(x){return(length(x)-length(na.omit(x)))}
+NA.counter(x)
+#Вариант 3. Идеал.
+NA.counter <- function(x){    
+  return(sum(is.na(x)))}
+
+
+# Задача 14.
+
+
+  #говнокод
+  filtered.sum <- function(x){
+    x <- na.omit(x)
+    i<-1
+    for (i in 1:length(x)){
+      ifelse (x[i]<0,x[i]<-0,x)
+      i<-i+1
+    }
+  x<-  sum(x)
+  x
+  }
+  
+  #норм решение
+  filtered.sum <- function(x){    
+    return(sum(x[x > 0], na.rm = T))}
+
+#Задача 15. Удаление выбросов, отклоняющихся от 1 или 3 квартиля на 1.5 межквартильных размаха.
+quantile(x, probs = c(0.25, 0.75)) # 1 и 3 квартиль для вектора x
+IQR(x) #межквартильный размах
+
+  outliers.rm <- function(x){
+    c <- quantile(x, probs = c(0.25, 0.75))
+    x<- x[x>=(c[1]-1.5*IQR(x)) & x<=(c[2]+1.5*IQR(x))]
+  }
+  
+
+ 
+
+
